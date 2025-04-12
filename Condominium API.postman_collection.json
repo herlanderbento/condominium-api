@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+		"name": "Condominium API",
+		"description": "Collection para a API de Condomínio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Boletos",
+			"item": [
+				{
+					"name": "Listar Boletos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/bills",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["bills"],
+							"query": [
+								{
+									"key": "name",
+									"value": "JOSE",
+									"description": "Filtro por nome"
+								},
+								{
+									"key": "valor_inicial",
+									"value": "100",
+									"description": "Valor mínimo"
+								},
+								{
+									"key": "valor_final",
+									"value": "200",
+									"description": "Valor máximo"
+								},
+								{
+									"key": "id_lote",
+									"value": "1",
+									"description": "ID do lote"
+								},
+								{
+									"key": "relatorio",
+									"value": "1",
+									"description": "Gerar relatório em PDF"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Importar CSV",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/bills/import-csv",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["bills", "import-csv"]
+						}
+					}
+				},
+				{
+					"name": "Dividir PDF",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/bills/split-pdf",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["bills", "split-pdf"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Lotes",
+			"item": [
+				{
+					"name": "Listar Lotes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/lots",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["lots"]
+						}
+					}
+				},
+				{
+					"name": "Buscar Lote por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/lots/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["lots", "1"]
+						}
+					}
+				},
+				{
+					"name": "Verificar Lotes Necessários",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/lots/check/required",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["lots", "check", "required"]
+						}
+					}
+				},
+				{
+					"name": "Criar Lotes Necessários",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/lots/create/required",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["lots", "create", "required"]
+						}
+					}
+				}
+			]
+		}
+	]
+} 
