@@ -11,8 +11,11 @@ API para gerenciamento de boletos e lotes de um condomínio.
 - Node.js (v14 ou superior)
 - PostgreSQL
 - npm ou yarn
+- Docker e Docker Compose (opcional)
 
 ## Configuração do Ambiente
+
+### Método 1: Instalação Local
 
 1. Clone o repositório:
 ```bash
@@ -44,6 +47,40 @@ npm run migrate
 5. Inicie o servidor:
 ```bash
 npm run start:dev
+```
+
+### Método 2: Usando Docker
+
+1. Clone o repositório:
+```bash
+git clone git@github.com:herlanderbento/condominium-api.git
+cd condominium-api
+```
+
+2. Configure as variáveis de ambiente:
+```bash
+cp .env.example .env
+```
+Edite o arquivo `.env` com suas configurações.
+
+3. Construa e inicie os containers:
+```bash
+docker-compose up -d
+```
+
+4. Execute as migrações:
+```bash
+docker-compose exec app npm run migrate
+```
+
+5. Acesse a API em:
+```
+http://localhost:3000
+```
+
+Para parar os containers:
+```bash
+docker-compose down
 ```
 
 ## Estrutura do Projeto

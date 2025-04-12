@@ -1,33 +1,48 @@
 version: '3.8'
 
 services:
-  # app:
-  #   build: .
-  #   ports:
-  #     - "3002:3000"
-  #   environment:
-  #     - DB_HOST=postgres
-  #     - DB_PORT=5432
-  #     - DB_USERNAME=postgres
-  #     - DB_PASSWORD=postgres
-  #     - DB_DATABASE=condominium
-  #   depends_on:
-  #     - postgres
-  #   volumes:
-  #     - ./uploads:/usr/src/app/uploads
-  #     - ./bills:/usr/src/app/bills
-  #     - ./temp:/usr/src/app/temp
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=${DB_USERNAME:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - DB_DATABASE=${DB_DATABASE:-condominium}
+      - PORT=3000
+      - REPORTS_DIR=reports
+      - TEMP_DIR=temp
+      - TEMP_PDFS_DIR=temp_pdfs
+    volumes:
+      - .:/app
+      - ./reports:/app/reports
+      - ./temp:/app/temp
+      - ./temp_pdfs:/app/temp_pdfs
+    depends_on:
+      - db
+    networks:
+      - condominium-network
 
-  postgres:
-    image: postgres:15-alpine
+  db:
+    image: postgres:14
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=condominium
+      - POSTGRES_USER=${DB_USERNAME:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - POSTGRES_DB=${DB_DATABASE:-condominium}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - condominium-network
 
 volumes:
-  postgres_data: 
+  postgres_data:
+
+networks:
+  condominium-network:
+    driver: bridge 
